@@ -1,59 +1,85 @@
 # Practical Statistics for Data Scientists (3rd Edition) — Python Implementation
 
-> 📘 **A companion repository for working through *"Practical Statistics for Data Scientists, 3rd Edition"* by Peter Bruce, Andrew Bruce, and Peter Gedeck — strictly implemented in Python.**
+> **A companion repository for working through *"Practical Statistics for Data Scientists, 3rd Edition"* by Peter Bruce, Andrew Bruce, and Peter Gedeck — strictly implemented in Python.**
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com)
 
 ---
 
-## 📑 Table of Contents
-1. [🎯 Project Goal](#-project-goal)
-2. [📚 Chapter Progress](#-chapter-progress)
-3. [🚀 Quick Start Guide](#-quick-start-guide)
-4. [🧰 Tools & Libraries](#-tools--libraries)
-5. [📝 Repository Workflow](#-repository-workflow)
-6. [🗂️ Data Management](#-data-management)
-7. [📂 Directory Structure](#-directory-structure)
+## Table of Contents
+1. [Purpose](#purpose)
+2. [Chapter Progress](#chapter-progress)
+3. [Study Workflow](#study-workflow)
+4. [Quick Start Guide](#quick-start-guide)
+5. [Tools & Libraries](#tools--libraries)
+6. [Directory Structure](#directory-structure)
 
 ---
 
-## 🎯 Project Goal
+## Purpose
 
-The objective of this repository is to work through *Practical Statistics for Data Scientists* chapter-by-chapter, translating and implementing all statistical concepts, examples, and exercises into **Python**. 
-
-**Environment & Workflow:**
-- ✅ **Google Colab** (Seamless cloud execution for notebooks)
-- ✅ **VS Code** (Primary IDE for development & local execution)
-- ✅ **Windows 10 + PowerShell** (Local environment configuration)
-- ❌ **R Code** (Omitted entirely to maintain a pure Python focus)
+This repository documents my chapter-by-chapter journey through *Practical Statistics for Data Scientists (3rd Edition)* using Python. It serves as a personal learning environment to translate statistical concepts into actionable code, complete exercises, and run experiments.
 
 ---
 
-## 📚 Chapter Progress
+## Chapter Progress
 
 | Chapter | Topic | Status | Primary Notebook |
 |:---|:---|:---:|:---|
 | **[1](./chapter_01_exploratory_data_analysis/)** | Exploratory Data Analysis | ⬜ Not Started | [`01_eda.ipynb`](./chapter_01_exploratory_data_analysis/01_eda.ipynb) |
-| **[2](./chapter_02_data_distribution/)** | Data & Sampling Distributions | ⬜ Not Started | [`02_data_distribution.ipynb`](./chapter_02_data_distribution/02_data_distribution.ipynb) |
-| **[3](./chapter_03_statistical_experiments/)**| Statistical Experiments & Significance Testing| ⬜ Not Started | — |
-| **[4](./chapter_04_regression_classification/)**| Regression & Prediction | ⬜ Not Started | — |
+| **[2](./chapter_02_data_and_sampling_distributions/)** | Data and Sampling Distributions | ⬜ Not Started | [`02_data_distributions.ipynb`](./chapter_02_data_and_sampling_distributions/02_data_distributions.ipynb) |
+| **[3](./chapter_03_statistical_experiments_and_significance_testing/)**| Statistical Experiments and Significance Testing | ⬜ Not Started | — |
+| **[4](./chapter_04_regression_and_prediction/)**| Regression and Prediction | ⬜ Not Started | — |
 | **[5](./chapter_05_classification/)** | Classification | ⬜ Not Started | — |
-| **[6](./chapter_06_probability/)** | Probability Distributions | ⬜ Not Started | — |
-| **[7](./chapter_07_statistical_machine_learning/)**| Statistical Machine Learning | ⬜ Not Started | — |
+| **[6](./chapter_06_statistical_machine_learning/)** | Statistical Machine Learning | ⬜ Not Started | — |
+| **[7](./chapter_07_unsupervised_learning/)**| Unsupervised Learning | ⬜ Not Started | — |
 
 > **Legend:** ✅ Completed | 🔄 In Progress | ⬜ Not Started
 
 ---
 
-## 🚀 Quick Start Guide
+## Study Workflow
 
-### Option 1: Google Colab (Recommended for Zero Setup)
+For each chapter, the learning process follows a strict progression to ensure deep understanding:
+
+```mermaid
+graph TD;
+    A[Read Textbook Chapter] --> B[Run Main Notebook];
+    B --> C[Complete Exercises];
+    C --> D[Explore in Experiments];
+    D --> E[Summarise in Notes];
+    E --> F[Commit Progress];
+
+```
+
+**Standard Notebook Template:**
+
+```python
+# %% [markdown]
+# # Chapter X: [Title]
+# **Source**: Practical Statistics for Data Scientists, 3e, pp. XX-XX
+
+# %%
+# Import utilities and standardise visualisations
+from utils.notebook_setup import *
+
+# %%
+# Load processed data for analysis
+df = pd.read_csv('../datasets/processed/cleaned_data.csv')
+
+```
+
+---
+
+## Quick Start Guide
+
+### Option 1: Google Colab (Zero Setup)
+
 1. Navigate to any `*.ipynb` file in this repository.
 2. Click the **"Open in Colab"** badge at the top of the file, or upload it directly to [Colab](https://colab.research.google.com).
-3. *(Optional)* Go to `Runtime` → `Change runtime type` → Select `GPU` for machine learning chapters.
-4. Run the cells sequentially. 
+3. Run the cells sequentially.
 
 ### Option 2: Local Environment (Windows 10 + PowerShell)
 
@@ -76,76 +102,32 @@ code .
 
 ```
 
-*(Note: If you prefer Conda, use `conda env create -f environment.yml` followed by `conda activate psds-python`)*
+---
+
+## Tools & Libraries
+
+This repository intentionally avoids overengineering and heavy ML frameworks until absolutely necessary. The core stack is kept lean:
+
+* **Data Manipulation:** `pandas`, `numpy`
+* **Visualisation:** `matplotlib`, `seaborn`, `plotly`
+* **Statistics & ML Core:** `scipy`, `statsmodels`, `scikit-learn`
+* **Utilities:** `jupyter`, `notebook`, `missingno`, `openpyxl`
 
 ---
 
-## 🧰 Tools & Libraries
-
-| Category | Core Libraries |
-| --- | --- |
-| **Data Manipulation** | `pandas`, `numpy` |
-| **Visualisation** | `matplotlib`, `seaborn`, `plotly` |
-| **Statistics** | `scipy`, `statsmodels` |
-| **Machine Learning** | `scikit-learn`, `xgboost`, `lightgbm` |
-| **Utilities** | `jupyter`, `ipywidgets`, `tqdm`, `joblib` |
-
----
-
-## 📝 Repository Workflow
-
-To get the most out of this repository, follow this structured approach for each chapter:
-
-1. **Read** the corresponding chapter in the textbook.
-2. **Execute** the main notebook (`0X_chapter_name.ipynb`) cell-by-cell to understand the core code.
-3. **Practise** by completing the end-of-chapter tasks in `exercises.ipynb`.
-4. **Explore** and extend the concepts with your own data in `experiments.ipynb`.
-5. **Summarise** the key insights, formulas, and takeaways in `chapter_notes.md`.
-6. **Commit** your progress using descriptive Git messages.
-
-**Standard Notebook Template:**
-
-```python
-# %% [markdown]
-# # Chapter X: [Title]
-# **Source**: Practical Statistics for Data Scientists, 3e, pp. XX-XX
-
-# %%
-# Import utilities and standardise visualisations
-from utils.notebook_setup import *
-
-# %%
-# Load processed data for analysis
-df = pd.read_csv('../datasets/processed/cleaned_data.csv')
-
-```
-
----
-
-## 🗂️ Data Management
-
-Strict data management rules are enforced to ensure reproducibility and keep the repository lightweight:
-
-* **`datasets/raw/`**: Original, immutable downloads. Never modify these directly. *(Note: Large files are ignored via `.gitignore`)*.
-* **`datasets/processed/`**: Cleaned, analysis-ready datasets. Notebooks should always load data from here.
-* **`datasets/external/`**: Third-party supplementary data with proper source attribution.
-
----
-
-## 📂 Directory Structure
+## Directory Structure
 
 ```text
 Practical-Statistics-for-DS/
 │
 ├── README.md                 # Project overview
 ├── requirements.txt          # Python dependencies (pip)
-├── environment.yml           # Conda environment definition
 ├── .gitignore                # Git ignore rules
 ├── LICENSE                   # MIT License
 │
-├── assets/                   # Visual assets (covers, diagrams, banners)
+├── assets/                   # Visual assets (covers, diagrams)
 ├── datasets/                 # Global datasets (raw, processed, external)
-├── notes/                    # Global study notes, formulas, and cheatsheets
+├── notes/                    # Global study notes and cheatsheets
 ├── utils/                    # Reusable Python helper scripts (plotting, stats)
 │
 ├── chapter_01_exploratory_data_analysis/
@@ -154,29 +136,21 @@ Practical-Statistics-for-DS/
 │   ├── exercises.ipynb       # Python solutions to book exercises
 │   ├── experiments.ipynb     # Personal extensions and sandbox
 │   ├── datasets/             # Chapter-specific datasets
-│   └── output/               # Generated graphs and tables
+│   └── output/               # Local generated graphs and tables
 │
-├── chapter_02_data_distribution/
+├── chapter_02_data_and_sampling_distributions/
 │   └── ... (Consistent structure across all chapters)
 │
-└── output/                   # Global output for final, publication-ready plots
+└── ...
 
 ```
 
 ---
 
-## 🤝 Contributing & Disclaimer
-
-While this is a personal learning repository, collaboration is welcome! Feel free to fork the project for your own studies, or open an issue if you spot an error in the implementation.
-
-> ⚠️ **Disclaimer**: This repository is strictly for educational purposes. All rights to the original text, conceptual examples, and proprietary datasets belong to the authors and O'Reilly Media. Please support the authors by purchasing *[Practical Statistics for Data Scientists, 3rd Edition](https://www.oreilly.com/library/view/practical-statistics-for/9781492072942/)*.
+> **Disclaimer**: This repository is strictly for educational purposes. All rights to the original text, conceptual examples, and proprietary datasets belong to the authors and O'Reilly Media. Please support the authors by purchasing *[Practical Statistics for Data Scientists, 3rd Edition](https://www.oreilly.com/library/view/practical-statistics-for/9781492072942/)*.
 
 ---
 
-## 👤 Author
+## Author
 
-**Anuj Chaudhary** 🔗 [GitHub](https://github.com/beingAnujChaudhary) | ✉️ [Email
-
-```
-
-```
+**Anuj Chaudhary** 🔗 [GitHub](https://github.com/beingAnujChaudhary)
