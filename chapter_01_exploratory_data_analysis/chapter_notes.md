@@ -69,13 +69,13 @@ By the end of this chapter, I should be able to:
 **Data Types:**
 
 - **Numeric Data**
-  - *Continuous:* Can take any value in an interval (e.g., temperature, time)
-  - *Discrete:* Integer values, counts (e.g., number of customers)
+  - *Continuous:* Can take any value in an interval (e.g., temperature, time)
+  - *Discrete:* Integer values, counts (e.g., number of customers)
 
 - **Categorical Data**
-  - Takes a fixed set of values (e.g., state names, product categories)
-  - *Binary:* Special case with two values (0/1, yes/no, true/false)
-  - *Ordinal:* Categories with explicit ordering (e.g., ratings 1–5)
+  - Takes a fixed set of values (e.g., state names, product categories)
+  - *Binary:* Special case with two values (0/1, yes/no, true/false)
+  - *Ordinal:* Categories with explicit ordering (e.g., ratings 1–5)
 
 **Why Data Types Matter:**
 - Determines appropriate visualisations
@@ -108,15 +108,15 @@ Measures of location describe the centre of the data.
 | **Weighted Mean** | $\bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}$ | Observations have different importance | ❌ No |
 
 **Key Insight from the Book:**
-For state population data: Mean (6.16M) > Trimmed Mean (4.78M) > Median (4.44M).  
+For state population data: Mean (6.16M) > Trimmed Mean (4.78M) > Median (4.44M).  
 This pattern indicates right-skewed data with high outliers pulling the mean upward.
 
 **Python Examples:**
 ```python
-df["column"].mean()                     # Mean
-df["column"].median()                   # Median
-trim_mean(df["column"], 0.1)            # 10% trimmed mean
-np.average(df["column"], weights=...)   # Weighted mean
+df["column"].mean()                     # Mean
+df["column"].median()                   # Median
+trim_mean(df["column"], 0.1)            # 10% trimmed mean
+np.average(df["column"], weights=...)   # Weighted mean
 
 ```
 
@@ -131,7 +131,7 @@ Measures of variability describe how spread out the data is.
 | **Variance** | $s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}$ | Average squared deviation from mean | ❌ |
 | **Standard Deviation** | $s = \sqrt{s^2}$ | Typical deviation from mean (original units) | ❌ |
 | **Interquartile Range (IQR)** | $Q3 - Q1$ | Spread of middle 50% | ✅ |
-| **Median Absolute Deviation (MAD)** | $\text{median}( | x_i - \text{median}(x) | )$ |
+| **Median Absolute Deviation (MAD)** | $\text{median}(\vert x_i - \text{median}(x)\vert)$ | Robust measure of spread | ✅ |
 | **Range** | $\max - \min$ | Total spread | ❌ |
 
 **Key Points:**
@@ -144,10 +144,10 @@ Measures of variability describe how spread out the data is.
 **Python Examples:**
 
 ```python
-df["column"].var()                      # Variance
-df["column"].std()                      # Standard deviation
-df["column"].quantile(0.75) - df["column"].quantile(0.25)  # IQR
-scipy.stats.median_abs_deviation(df["column"])              # MAD
+df["column"].var()                      # Variance
+df["column"].std()                      # Standard deviation
+df["column"].quantile(0.75) - df["column"].quantile(0.25)  # IQR
+scipy.stats.median_abs_deviation(df["column"])              # MAD
 
 ```
 
@@ -208,9 +208,9 @@ sns.kdeplot(data=df, x="column")
 **Python Example:**
 
 ```python
-df["category"].value_counts()           # Frequency table
-df["category"].value_counts(normalize=True)  # Proportions
-sns.countplot(data=df, x="category")    # Bar chart
+df["category"].value_counts()           # Frequency table
+df["category"].value_counts(normalize=True)  # Proportions
+sns.countplot(data=df, x="category")    # Bar chart
 
 ```
 
@@ -245,9 +245,9 @@ $$r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{(n-1) s_x s_y}$$
 * **Correlation Heatmap:** Quick overview of all pairwise correlations
 
 ```python
-df.corr(numeric_only=True)                    # Correlation matrix
-sns.heatmap(df.corr(numeric_only=True), annot=True)  # Heatmap
-sns.scatterplot(data=df, x="var1", y="var2")  # Scatterplot
+df.corr(numeric_only=True)                    # Correlation matrix
+sns.heatmap(df.corr(numeric_only=True), annot=True)  # Heatmap
+sns.scatterplot(data=df, x="var1", y="var2")  # Scatterplot
 
 ```
 
@@ -280,42 +280,21 @@ sns.catplot(data=df, x="category", y="value", col="group")
 
 ### Location
 
-**Mean:**
+$$\text{Mean: } \bar{x} = \frac{\sum x_i}{n}$$
 
-
-$$\bar{x} = \frac{\sum x_i}{n}$$
-
-**Weighted Mean:**
-
-
-$$\bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}$$
+$$\text{Weighted Mean: } \bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}$$
 
 ### Variability
 
-**Variance:**
+$$\text{Variance: } s^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1}$$
 
+$$\text{Standard Deviation: } s = \sqrt{s^2}$$
 
-$$s^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1}$$
+$$\text{IQR: } Q3 - Q1$$
 
-**Standard Deviation:**
-
-
-$$s = \sqrt{s^2}$$
-
-**IQR:**
-
-
-$$Q3 - Q1$$
-
-**MAD:**
-
-
-$$\text{Median}(|x_i - \text{Median}(x)|)$$
+$$\text{MAD: } \text{Median}(\vert x_i - \text{Median}(x)\vert)$$
 
 ### Correlation
-
-**Pearson Correlation:**
-
 
 $$r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{(n-1) s_x s_y}$$
 
@@ -380,7 +359,5 @@ EDA is the foundation of data science. This chapter introduces methods to:
 * [ ] Perform experiments in `experiments.ipynb`
 
 ---
-
-```
 
 ```
