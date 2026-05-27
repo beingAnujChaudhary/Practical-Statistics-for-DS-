@@ -62,7 +62,7 @@ This repository documents my chapter-by-chapter journey through *Practical Stati
 ```powershell
 # 1. Clone the repository
 git clone https://github.com/beingAnujChaudhary/Practical-Statistics-for-DS-.git
-cd Practical-Statistics-for-DS-
+cd Practical-Statistics-for-DS
 
 # 2. Create and activate virtual environment
 python -m venv venv
