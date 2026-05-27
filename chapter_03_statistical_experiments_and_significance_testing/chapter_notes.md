@@ -1,3 +1,4 @@
+```markdown
 # Chapter 03: Statistical Experiments and Significance Testing
 
 > **Source:** *Practical Statistics for Data Scientists, 2nd Edition* by Peter Bruce, Andrew Bruce, and Peter Gedeck
@@ -79,6 +80,7 @@ A statistical experiment compares outcomes between groups to determine whether d
 
 ```python
 group_stats = df.groupby("group")["conversion"].mean()
+
 ```
 
 **Why Control Groups Matter:** They isolate the treatment effect from external factors and prevent confounding.
@@ -90,16 +92,19 @@ group_stats = df.groupby("group")["conversion"].mean()
 Hypothesis testing starts with clearly stated assumptions.
 
 **Null Hypothesis (H₀):** Default assumption — *no difference exists.*
-- *Example:* "The new website has no impact on conversions."
+
+* *Example:* "The new website has no impact on conversions."
 
 **Alternative Hypothesis (H₁):** Competing claim — *a difference exists.*
-- *Example:* "The new website improves conversion rate."
+
+* *Example:* "The new website improves conversion rate."
 
 **Decision Process:** Evidence leads us to either *reject H₀* or *fail to reject H₀*. We never truly "prove" hypotheses.
 
 **One-Way vs. Two-Way Tests:**
-- **One-way:** Tests for improvement in one direction only.
-- **Two-way:** Tests for any difference (more common in practice).
+
+* **One-way:** Tests for improvement in one direction only.
+* **Two-way:** Tests for any difference (more common in practice).
 
 ---
 
@@ -110,18 +115,20 @@ Permutation testing is a modern, intuitive, and assumption-light significance te
 **Core Idea:** Shuffle group labels randomly, recalculate the test statistic, and compare the observed difference to the distribution of permuted differences.
 
 **Algorithm:**
+
 1. Combine outcomes from all groups.
 2. Randomly shuffle group labels.
 3. Split into groups matching original sizes.
 4. Calculate the difference in the statistic (e.g., mean difference).
-5. Repeat \(R\) times (e.g., 1,000–10,000).
+5. Repeat $R$ times (e.g., 1,000–10,000).
 6. Compare the observed statistic to the permuted distribution.
 
 **Advantages:**
-- No normality assumptions required
-- Works with any test statistic
-- Handles unbalanced samples
-- Intuitive interpretation
+
+* No normality assumptions required
+* Works with any test statistic
+* Handles unbalanced samples
+* Intuitive interpretation
 
 ```python
 def permutation_test(group_a, group_b, statistic_func=np.mean, R=10000):
@@ -135,6 +142,7 @@ def permutation_test(group_a, group_b, statistic_func=np.mean, R=10000):
         perm_diffs.append(statistic_func(perm_a) - statistic_func(perm_b))
     p_value = np.mean(np.abs(perm_diffs) >= np.abs(observed))
     return observed, p_value, perm_diffs
+
 ```
 
 ---
@@ -143,41 +151,42 @@ def permutation_test(group_a, group_b, statistic_func=np.mean, R=10000):
 
 **Statistical Significance:** Measures whether results are unlikely to occur by random chance alone.
 
-**Common Threshold:** \(\alpha = 0.05\)
+**Common Threshold:** $\alpha = 0.05$
 
-If \(p < 0.05\), results are often called *statistically significant*.
+If $p < 0.05$, results are often called *statistically significant*.
 
 **p-Value Definition:** *The probability of observing results as extreme as (or more extreme than) the actual results, assuming the null hypothesis is true.*
 
 **Interpretation:**
-- **Small p-value:** Evidence against H₀.
-- **Large p-value:** Weak evidence against H₀.
+
+* **Small p-value:** Evidence against H₀.
+* **Large p-value:** Weak evidence against H₀.
 
 **Critical Misconceptions (ASA Warning, 2016):**
-- A p-value is **NOT** the probability that H₀ is true.
-- A p-value is **NOT** the probability that results happened by chance.
-- Statistical significance does **NOT** imply practical importance.
-- A p-value alone should **not** be the sole basis for decisions.
+
+* A p-value is **NOT** the probability that H₀ is true.
+* A p-value is **NOT** the probability that results happened by chance.
+* Statistical significance does **NOT** imply practical importance.
+* A p-value alone should **not** be the sole basis for decisions.
 
 ---
 
 ### 5. Type I and Type II Errors
 
 | Error Type | Definition | Example | Controlled By |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Type I (False Positive)** | Rejecting H₀ when it is actually true | Concluding new website works when it doesn't | α (alpha), typically 0.05 |
 | **Type II (False Negative)** | Failing to reject H₀ when an effect truly exists | Missing a genuinely better product design | Power, sample size |
 
 **Statistical Power:** The probability of detecting a real effect when it exists.
 
-\[
-\text{Power} = 1 - \beta \quad \text{(where } \beta \text{ is the Type II error rate)}
-\]
+$$\text{Power} = 1 - \beta \quad \text{(where } \beta \text{ is the Type II error rate)}$$
 
 Power increases with:
-- Larger sample size
-- Stronger effect size
-- Lower variability
+
+* Larger sample size
+* Stronger effect size
+* Lower variability
 
 ---
 
@@ -187,19 +196,19 @@ t-tests compare means between two groups when data is numeric.
 
 **t-Statistic:** Standardised difference between means, scaled by pooled standard error.
 
-\[
-t = \frac{\bar{x}_1 - \bar{x}_2}{SE_{\text{pooled}}}
-\]
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{SE_{\text{pooled}}}$$
 
 **Types:**
-- **Independent t-test:** Separate groups (e.g., website A vs. website B).
-- **Paired t-test:** Same subjects measured twice (e.g., before vs. after intervention).
+
+* **Independent t-test:** Separate groups (e.g., website A vs. website B).
+* **Paired t-test:** Same subjects measured twice (e.g., before vs. after intervention).
 
 **Data Science Relevance:** Useful for quick comparisons, but resampling is often preferred for flexibility.
 
 ```python
 from scipy.stats import ttest_ind
 ttest_ind(group_a, group_b, equal_var=False)
+
 ```
 
 ---
@@ -217,6 +226,7 @@ ttest_ind(group_a, group_b, equal_var=False)
 ```python
 from scipy.stats import f_oneway
 f_oneway(group_a, group_b, group_c)
+
 ```
 
 ---
@@ -226,9 +236,8 @@ f_oneway(group_a, group_b, group_c)
 **Purpose:** Test independence between categorical variables or goodness-of-fit to an expected distribution.
 
 **Statistic:**
-\[
-\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}
-\]
+
+$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$
 
 **Resampling Approach:** Shuffle category labels, recompute chi-square, compare to observed.
 
@@ -240,6 +249,7 @@ f_oneway(group_a, group_b, group_c)
 from scipy.stats import chi2_contingency
 observed = np.array([[a_yes, a_no], [b_yes, b_no]])
 chi2, p, dof, expected = chi2_contingency(observed)
+
 ```
 
 ---
@@ -248,14 +258,15 @@ chi2, p, dof, expected = chi2_contingency(observed)
 
 **Problem:** Testing many hypotheses increases the probability of false positives.
 
-**Example:** 20 independent tests at \(\alpha = 0.05\) → ~64% chance of at least one false positive.
+**Example:** 20 independent tests at $\alpha = 0.05$ → ~64% chance of at least one false positive.
 
 **Mitigation Strategies:**
-- Holdout/validation sets for model selection
-- **Bonferroni correction:** \(\alpha_{\text{adjusted}} = \alpha / m\) (where \(m\) = number of tests)
-- **Benjamini-Hochberg FDR:** Controls the false discovery rate
-- Pre-specify hypotheses; avoid "data dredging"
-- Use cross-validation for predictive modelling
+
+* Holdout/validation sets for model selection
+* **Bonferroni correction:** $\alpha_{\text{adjusted}} = \alpha / m$ (where $m$ = number of tests)
+* **Benjamini-Hochberg FDR:** Controls the false discovery rate
+* Pre-specify hypotheses; avoid "data dredging"
+* Use cross-validation for predictive modelling
 
 ---
 
@@ -265,7 +276,7 @@ chi2, p, dof, expected = chi2_contingency(observed)
 
 **Bandit Solution:** Dynamically allocate traffic to better-performing arms while still exploring alternatives.
 
-**Epsilon-Greedy:** With probability \(\varepsilon\), explore randomly; otherwise, exploit the best arm.
+**Epsilon-Greedy:** With probability $\varepsilon$, explore randomly; otherwise, exploit the best arm.
 
 **Thompson Sampling:** Bayesian approach; sample from posterior distributions of each arm, pick the arm with the highest sampled value.
 
@@ -287,6 +298,7 @@ class EpsilonGreedyBandit:
         self.counts[arm] += 1
         n = self.counts[arm]
         self.values[arm] += (reward - self.values[arm]) / n
+
 ```
 
 ---
@@ -295,9 +307,10 @@ class EpsilonGreedyBandit:
 
 **Power:** Probability of detecting a true effect of a specified size.
 
-**Components:** Effect size, sample size, \(\alpha\) level, variance.
+**Components:** Effect size, sample size, $\alpha$ level, variance.
 
 **Simulation Approach for Data Science:**
+
 1. Create synthetic data reflecting expected distributions.
 2. Add target effect size.
 3. Bootstrap resample, run test, record significance.
@@ -315,6 +328,7 @@ def simulate_power(effect_size, n_per_group, alpha=0.05, R=1000):
         if p < alpha:
             significant += 1
     return significant / R
+
 ```
 
 ---
@@ -323,29 +337,19 @@ def simulate_power(effect_size, n_per_group, alpha=0.05, R=1000):
 
 ### Hypothesis Testing
 
-\[
-\text{p-value} = P(\text{statistic} \geq \text{observed} \mid H_0 \text{ true}) \approx \frac{\# \text{permuted stats} \geq \text{observed}}{R}
-\]
+$$\text{p-value} = P(\text{statistic} \geq \text{observed} \mid H_0 \text{ true}) \approx \frac{\# \text{permuted stats} \geq \text{observed}}{R}$$
 
-\[
-t = \frac{\bar{x}_1 - \bar{x}_2}{SE_{\text{pooled}}}, \quad SE_{\text{pooled}} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
-\]
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{SE_{\text{pooled}}}, \quad SE_{\text{pooled}} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
 
 ### ANOVA and Chi-Square
 
-\[
-F = \frac{MS_{\text{between}}}{MS_{\text{within}}}
-\]
+$$F = \frac{MS_{\text{between}}}{MS_{\text{within}}}$$
 
-\[
-\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}, \quad df = (\text{rows} - 1)(\text{cols} - 1)
-\]
+$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}, \quad df = (\text{rows} - 1)(\text{cols} - 1)$$
 
 ### Power and Sample Size
 
-\[
-\text{Power} = 1 - \beta, \quad SE = \frac{s}{\sqrt{n}} \rightarrow \text{Quadruple } n \text{ to halve SE}
-\]
+$$\text{Power} = 1 - \beta, \quad SE = \frac{s}{\sqrt{n}} \rightarrow \text{Quadruple } n \text{ to halve SE}$$
 
 ---
 
@@ -357,6 +361,7 @@ Used for comparing conversion rates and group performance.
 
 ```python
 sns.barplot(data=df, x="group", y="conversion")
+
 ```
 
 ### Boxplots for Group Comparison
@@ -365,6 +370,7 @@ Used for comparing group variability and identifying outliers.
 
 ```python
 sns.boxplot(data=df, x="group", y="metric")
+
 ```
 
 ### Permutation Distribution Plots
@@ -397,12 +403,12 @@ Modern technology companies (Google, Netflix, Amazon, Meta) rely heavily on onli
 
 1. **Misinterpreting p-values:** p-value ≠ probability H₀ is true; p-value ≠ probability results are due to chance.
 2. **Confusing statistical significance with practical importance:** A tiny effect can be statistically significant with enough data but may have no business value.
-3. **P-hacking / Data dredging:** Repeatedly testing until \(p < 0.05\) creates misleading conclusions.
+3. **P-hacking / Data dredging:** Repeatedly testing until $p < 0.05$ creates misleading conclusions.
 4. **Stopping experiments early:** When results "look significant," this inflates Type I error.
 5. **Ignoring multiple testing:** Running many A/B tests or feature significance checks without correction guarantees false positives.
 6. **Using chi-square with small expected counts** (< 5): Switch to Fisher's exact test or resampling.
 7. **Confusing correlation with causation:** In observational A/B-like analyses without randomisation.
-8. **Over-optimising bandits** with too-low \(\varepsilon\): Premature convergence to suboptimal arms.
+8. **Over-optimising bandits** with too-low $\varepsilon$: Premature convergence to suboptimal arms.
 
 ---
 
@@ -420,30 +426,33 @@ Modern technology companies (Google, Netflix, Amazon, Meta) rely heavily on onli
 
 ## Connections to Other Chapters
 
-- **Chapter 1:** EDA informs metric selection for A/B tests; boxplots and histograms visualise group differences.
-- **Chapter 2:** Sampling distributions, bootstrap, and standard error underpin permutation test logic.
-- **Chapter 4:** t-tests appear in regression coefficient significance; ANOVA generalises to linear models.
-- **Chapter 5:** Chi-square tests used for feature selection; A/B testing informs classification threshold tuning.
-- **Chapter 6:** Bandit algorithms extend to model selection and hyperparameter tuning; cross-validation mitigates multiple testing.
+* **Chapter 1:** EDA informs metric selection for A/B tests; boxplots and histograms visualise group differences.
+* **Chapter 2:** Sampling distributions, bootstrap, and standard error underpin permutation test logic.
+* **Chapter 4:** t-tests appear in regression coefficient significance; ANOVA generalises to linear models.
+* **Chapter 5:** Chi-square tests used for feature selection; A/B testing informs classification threshold tuning.
+* **Chapter 6:** Bandit algorithms extend to model selection and hyperparameter tuning; cross-validation mitigates multiple testing.
 
 ---
 
 ### Questions I Still Have
-- How does permutation test performance scale with dataset size compared to classical approximations?
-- When should I prefer Thompson sampling over epsilon-greedy in production bandits?
-- How to properly adjust for multiple testing in automated feature selection pipelines?
-- What's the minimum detectable effect size for my current business metric given traffic volume?
 
-
+* How does permutation test performance scale with dataset size compared to classical approximations?
+* When should I prefer Thompson sampling over epsilon-greedy in production bandits?
+* How to properly adjust for multiple testing in automated feature selection pipelines?
+* What's the minimum detectable effect size for my current business metric given traffic volume?
 
 ## Progress Checklist
 
-- [ ] Read complete chapter (pp. 87–139)
-- [ ] Implement permutation test from scratch
-- [ ] Compare resampling p-values with `scipy.stats` classical tests
-- [ ] Complete `03_statistical_experiments_and_significance_testing.ipynb`
-- [ ] Solve all exercises in `exercises.ipynb`
-- [ ] Build epsilon-greedy bandit simulation in `experiments.ipynb`
-- [ ] Simulate power/sample size for a binary conversion metric
+* [ ] Read complete chapter (pp. 87–139)
+* [ ] Implement permutation test from scratch
+* [ ] Compare resampling p-values with `scipy.stats` classical tests
+* [ ] Complete `03_statistical_experiments_and_significance_testing.ipynb`
+* [ ] Solve all exercises in `exercises.ipynb`
+* [ ] Build epsilon-greedy bandit simulation in `experiments.ipynb`
+* [ ] Simulate power/sample size for a binary conversion metric
 
 ---
+
+```
+
+```
