@@ -1,0 +1,51 @@
+State,Population,Murder.Rate,Abbreviation,HighMurder,MurderQuartile,PopDensity,Region
+Alabama,4779736,5.7,AL,1,Q4 (Highest),4.779736,South
+Alaska,710231,5.6,AK,1,Q4 (Highest),0.710231,West
+Arizona,6392017,4.7,AZ,1,Q3,6.392017,West
+Arkansas,2915918,5.6,AR,1,Q4 (Highest),2.915918,South
+California,37253956,4.4,CA,1,Q3,37.253956,West
+Colorado,5029196,2.8,CO,0,Q2,5.029196,West
+Connecticut,3574097,2.4,CT,0,Q1 (Lowest),3.574097,Northeast
+Delaware,897934,5.8,DE,1,Q4 (Highest),0.897934,South
+Florida,18801310,5.8,FL,1,Q4 (Highest),18.80131,South
+Georgia,9687653,5.7,GA,1,Q4 (Highest),9.687653,South
+Hawaii,1360301,1.8,HI,0,Q1 (Lowest),1.360301,West
+Idaho,1567582,2.0,ID,0,Q1 (Lowest),1.567582,West
+Illinois,12830632,5.3,IL,1,Q3,12.830632,Midwest
+Indiana,6483802,5.0,IN,1,Q3,6.483802,Midwest
+Iowa,3046355,1.9,IA,0,Q1 (Lowest),3.046355,Midwest
+Kansas,2853118,3.1,KS,0,Q2,2.853118,Midwest
+Kentucky,4339367,3.6,KY,0,Q2,4.339367,South
+Louisiana,4533372,10.3,LA,1,Q4 (Highest),4.533372,South
+Maine,1328361,1.6,ME,0,Q1 (Lowest),1.328361,Northeast
+Maryland,5773552,6.1,MD,1,Q4 (Highest),5.773552,South
+Massachusetts,6547629,2.0,MA,0,Q1 (Lowest),6.547629,Northeast
+Michigan,9883640,5.4,MI,1,Q3,9.88364,Midwest
+Minnesota,5303925,1.6,MN,0,Q1 (Lowest),5.303925,Midwest
+Mississippi,2967297,8.6,MS,1,Q4 (Highest),2.967297,South
+Missouri,5988927,6.6,MO,1,Q4 (Highest),5.988927,Midwest
+Montana,989415,3.6,MT,0,Q2,0.989415,West
+Nebraska,1826341,2.9,NE,0,Q2,1.826341,Midwest
+Nevada,2700551,6.0,NV,1,Q4 (Highest),2.700551,West
+New Hampshire,1316470,0.9,NH,0,Q1 (Lowest),1.31647,Northeast
+New Jersey,8791894,3.9,NJ,0,Q2,8.791894,Northeast
+New Mexico,2059179,4.8,NM,1,Q3,2.059179,West
+New York,19378102,3.1,NY,0,Q2,19.378102,Northeast
+North Carolina,9535483,5.1,NC,1,Q3,9.535483,South
+North Dakota,672591,3.0,ND,0,Q2,0.672591,Midwest
+Ohio,11536504,4.0,OH,0,Q2,11.536504,Midwest
+Oklahoma,3751351,4.5,OK,1,Q3,3.751351,South
+Oregon,3831074,2.0,OR,0,Q1 (Lowest),3.831074,West
+Pennsylvania,12702379,4.8,PA,1,Q3,12.702379,Northeast
+Rhode Island,1052567,2.4,RI,0,Q1 (Lowest),1.052567,Northeast
+South Carolina,4625364,6.4,SC,1,Q4 (Highest),4.625364,South
+South Dakota,814180,2.3,SD,0,Q1 (Lowest),0.81418,Midwest
+Tennessee,6346105,5.7,TN,1,Q4 (Highest),6.346105,South
+Texas,25145561,4.4,TX,1,Q3,25.145561,South
+Utah,2763885,2.3,UT,0,Q1 (Lowest),2.763885,West
+Vermont,625741,1.6,VT,0,Q1 (Lowest),0.625741,Northeast
+Virginia,8001024,4.1,VA,1,Q3,8.001024,South
+Washington,6724540,2.5,WA,0,Q2,6.72454,West
+West Virginia,1852994,4.0,WV,0,Q2,1.852994,South
+Wisconsin,5686986,2.9,WI,0,Q2,5.686986,Midwest
+Wyoming,563626,2.7,WY,0,Q2,0.563626,West
